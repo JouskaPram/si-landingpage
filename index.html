@@ -5,17 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistem Informasi Unsil</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              clifford: "#da373d",
-            },
-          },
-        },
-      };
-    </script>
+    <link rel="stylesheet" href="assets/main.css" />
   </head>
-  <body></body>
+  <body>
+    <script type="module">
+      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+      const supabaseUrl = "https://rncscnjekzvtouuanlnf.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuY3Njbmpla3p2dG91dWFubG5mIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODk4MzYwNjIsImV4cCI6MjAwNTQxMjA2Mn0.NUCAHTzLmgJB6lAl8Rfy5EugwROqOe0ycytjg4dwq2c";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const getMahasiswa = async () => {
+        const { data, error } = await supabase.from("Mahasiswa").select();
+        console.log(data);
+        if (error) {
+          console.log(error);
+        }
+      };
+
+      window.addEventListener("load", function () {
+        getMahasiswa();
+      });
+    </script>
+  </body>
 </html>
